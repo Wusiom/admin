@@ -1,4 +1,4 @@
-﻿module.exports = {
+module.exports = {
   extends: ['@commitlint/config-conventional'],
   // 定义规则类型
   rules: {
