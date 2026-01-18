@@ -1,32 +1,42 @@
 <template>
   <div class="login-container">
-    <el-form class="login-form">
+    <el-form class="login-form" :model="form" :rules="rules" ref="formRef">
       <div class="title-container">
         <h3 class="title">用户登录</h3>
       </div>
 
       <el-form-item prop="username">
         <span class="svg-container">
-          <SvgIcon icon="https://res.lgdsunday.club/user.svg" />
+          <SvgIcon icon="user" />
         </span>
-        <el-input placeholder="username" name="username" type="text" />
+        <el-input
+          v-model="form.username"
+          placeholder="username"
+          name="username"
+          type="text"
+        />
       </el-form-item>
 
       <el-form-item prop="password">
         <span class="svg-container">
-          <el-icon>
-            <avatar />
-          </el-icon>
+          <SvgIcon icon="password" />
         </span>
-        <el-input placeholder="password" name="password" />
-        <span class="show-pwd">
-          <el-icon>
-            <avatar />
-          </el-icon>
+        <el-input
+          v-model="form.password"
+          placeholder="password"
+          name="password"
+          :type="pswType"
+        />
+        <span class="show-pwd" @click="changePswType">
+          <SvgIcon :icon="pswType === 'password' ? 'eye' : 'eye-open'" />
         </span>
       </el-form-item>
 
-      <el-button type="primary" style="width: 100%; margin-bottom: 30px"
+      <el-button
+        type="primary"
+        style="width: 100%; margin-bottom: 30px"
+        :loading="loading"
+        @click="handleLogin"
         >登录</el-button
       >
     </el-form>
@@ -34,25 +44,46 @@
 </template>
 
 <script setup>
-// import { ref } from 'vue'
-import { Avatar } from '@element-plus/icons'
-import SvgIcon from '@/components/SvgIcon/index.vue'
-// const form = ref({
-//   username: '',
-//   password: ''
-// })
-// const rules = ref({
-//   username: [{ required: true, message: '请输入用户名', trigger: 'blur' }],
-//   password: [{ required: true, message: '请输入密码', trigger: 'blur' }]
-// })
-// const formRef = ref(null)
-// const login = () => {
-//   formRef.value.validate((valid) => {
-//     if (valid) {
-//       console.log('登录成功')
-//     }
-//   })
-// }
+import { ref } from 'vue'
+import { validatePassword } from './rules'
+import useUserStore from '@/store/user'
+import router from '@/router'
+const userStore = useUserStore()
+const form = ref({
+  username: '',
+  password: ''
+})
+const rules = ref({
+  username: [{ required: true, message: '请输入用户名', trigger: 'blur' }],
+  password: [{ required: true, validator: validatePassword(), trigger: 'blur' }]
+})
+const formRef = ref(null)
+
+const pswType = ref('password')
+const changePswType = () => {
+  if (pswType.value === 'password') {
+    pswType.value = 'text'
+  } else {
+    pswType.value = 'password'
+  }
+}
+const loading = ref(false)
+const handleLogin = () => {
+  formRef.value.validate((valid) => {
+    if (!valid) return
+    loading.value = true
+    userStore
+      .login(form.value)
+      .then((res) => {
+        loading.value = false
+        router.push('/')
+      })
+      .catch((err) => {
+        console.log(err)
+        loading.value = false
+      })
+  })
+}
 </script>
 
 <style lang="scss" scoped>
@@ -87,15 +118,25 @@ $cursor: #fff;
       height: 47px;
       width: 85%;
 
-      input {
+      .el-input__wrapper {
+        width: 100%;
         background: transparent;
         border: 0px;
+        box-shadow: none !important;
         -webkit-appearance: none;
         border-radius: 0px;
         padding: 12px 5px 12px 15px;
         color: $light_gray;
         height: 47px;
         caret-color: $cursor;
+
+        .el-input__inner {
+          color: #fff;
+        }
+      }
+
+      .el-input__wrapper.is-focus {
+        box-shadow: none !important;
       }
     }
   }
