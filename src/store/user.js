@@ -1,12 +1,16 @@
 import { defineStore } from 'pinia'
 import { login, getUserInfo } from '@/api/sys'
 import md5 from 'md5'
-import { setItem, getItem } from '@/utils/storage'
+import { setItem, getItem, removeAll } from '@/utils/storage'
 import { TOKEN } from '@/constant'
+import router from '@/router'
+import { setTimeStamp } from '@/utils/auth'
+import variables from '@/styles/variables.module.scss'
 export default defineStore('user', {
   state: () => ({
     userInfo: {},
-    token: getItem(TOKEN) || ''
+    token: getItem(TOKEN) || '',
+    cssVar: variables
   }),
   getters: {
     hasUserInfo: (state) => {
@@ -19,6 +23,7 @@ export default defineStore('user', {
       return new Promise((resolve, reject) => {
         login({ username, password: md5(password) }).then(res => {
           this.setToken(res.token)
+          setTimeStamp()
           resolve(res)
         }).catch(err => {
           reject(err)
@@ -31,8 +36,13 @@ export default defineStore('user', {
     },
     async getUserInfo() {
       const res = await getUserInfo()
-      console.log(res, 123)
-      this.userInfo = res.data
+      this.userInfo = res
+    },
+    logout() {
+      this.token = ''
+      this.userInfo = {}
+      removeAll()
+      router.push('/login')
     }
   }
 })

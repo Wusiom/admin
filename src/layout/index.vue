@@ -1,5 +1,8 @@
 <template>
-  <div class="app-wrapper">
+  <div
+    class="app-wrapper"
+    :class="[appStore.sidebarOpened ? 'openSidebar' : 'hideSidebar']"
+  >
     <!-- 左侧 menu -->
     <sidebar
       class="sidebar-container"
@@ -21,11 +24,13 @@ import variables from '@/styles/variables.module.scss'
 import Sidebar from './components/Sidebar/index.vue'
 import Navbar from './components/Navbar/index.vue'
 import AppMain from './components/AppMain/index.vue'
+import useAppStore from '@/store/app'
+const appStore = useAppStore()
 </script>
 
 <style lang="scss" scoped>
 @import '~@/styles/mixin.scss';
-@import '~@/styles/variables.scss';
+@import '~@/styles/variables.module.scss';
 
 .app-wrapper {
   @include clearfix;
@@ -40,5 +45,10 @@ import AppMain from './components/AppMain/index.vue'
   right: 0;
   z-index: 9;
   width: calc(100% - #{$sideBarWidth});
+  transition: width #{$sideBarDuration};
+}
+
+.hideSidebar .fixed-header {
+  width: calc(100% - #{$hideSideBarWidth});
 }
 </style>

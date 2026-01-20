@@ -30,5 +30,12 @@ module.exports = defineConfig({
         symbolId: 'icon-[name]'
       })
       .end()
+  },
+  configureWebpack: {
+    resolve: {
+      fallback: {
+        path: require.resolve('path-browserify')
+      }
+    }
   }
 })

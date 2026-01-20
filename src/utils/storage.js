@@ -15,7 +15,6 @@ export const getItem = (key) => {
 export const removeItem = (key) => {
   window.localStorage.removeItem(key)
 }
-export const clear = () => {
-  console.log('clear')
+export const removeAll = () => {
   window.localStorage.clear()
 }
