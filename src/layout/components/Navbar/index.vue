@@ -4,6 +4,7 @@
     <breadcrumb class="breadcrumb-container" />
     <div class="right-menu">
       <LangSelect class="right-menu-item hover-effect" />
+      <theme-select class="right-menu-item hover-effect"></theme-select>
       <!-- 头像 -->
       <el-dropdown class="avatar-container" trigger="click">
         <div class="avatar-wrapper">
@@ -17,13 +18,13 @@
         <template #dropdown>
           <el-dropdown-menu class="user-dropdown">
             <router-link to="/">
-              <el-dropdown-item> 首页 </el-dropdown-item>
+              <el-dropdown-item> {{ $t('msg.navBar.home') }} </el-dropdown-item>
             </router-link>
             <a target="_blank" href="">
-              <el-dropdown-item>课程主页</el-dropdown-item>
+              <el-dropdown-item>{{ $t('msg.navBar.course') }}</el-dropdown-item>
             </a>
             <el-dropdown-item divided>
-              <div @click="userStore.logout">退出登录</div>
+              <div @click="userStore.logout">{{ $t('msg.navBar.logout') }}</div>
             </el-dropdown-item>
           </el-dropdown-menu>
         </template>
@@ -37,8 +38,8 @@ import Hamburger from '@/components/Hamburger'
 import Breadcrumb from '@/layout/components/Breadcrumb/index.vue'
 import useUserStore from '@/store/user'
 import LangSelect from '@/components/LangSelect'
+import ThemeSelect from '@/components/ThemeSelect'
 const userStore = useUserStore()
-console.log(userStore.userInfo, 123)
 </script>
 
 <style lang="scss" scoped>

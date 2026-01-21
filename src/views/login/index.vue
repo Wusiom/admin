@@ -1,6 +1,12 @@
 <template>
   <div class="login-container">
-    <el-form class="login-form" :model="form" :rules="rules" ref="formRef">
+    <el-form
+      class="login-form"
+      :model="form"
+      :rules="rules"
+      ref="formRef"
+      @keyup.enter="handleLogin"
+    >
       <div class="title-container">
         <h3 class="title">{{ $t('msg.login.title') }}</h3>
         <lang-select class="lang-select" effect="light"></lang-select>
