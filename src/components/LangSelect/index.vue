@@ -41,6 +41,7 @@ defineProps({
 
 const store = useAppStore()
 const language = computed(() => store.language)
+console.log(language.value)
 
 // 切换语言的方法
 const i18n = useI18n()

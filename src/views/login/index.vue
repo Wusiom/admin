@@ -2,7 +2,8 @@
   <div class="login-container">
     <el-form class="login-form" :model="form" :rules="rules" ref="formRef">
       <div class="title-container">
-        <h3 class="title">用户登录</h3>
+        <h3 class="title">{{ $t('msg.login.title') }}</h3>
+        <lang-select class="lang-select" effect="light"></lang-select>
       </div>
 
       <el-form-item prop="username">
@@ -37,8 +38,9 @@
         style="width: 100%; margin-bottom: 30px"
         :loading="loading"
         @click="handleLogin"
-        >登录</el-button
+        >{{ $t('msg.login.loginBtn') }}</el-button
       >
+      <div class="tips" v-html="$t('msg.login.desc')"></div>
     </el-form>
   </div>
 </template>
@@ -48,13 +50,18 @@ import { ref } from 'vue'
 import { validatePassword } from './rules'
 import useUserStore from '@/store/user'
 import router from '@/router'
+import LangSelect from '@/components/LangSelect/index.vue'
+import { useI18n } from 'vue-i18n'
+const { t } = useI18n()
 const userStore = useUserStore()
 const form = ref({
   username: '',
   password: ''
 })
 const rules = ref({
-  username: [{ required: true, message: '请输入用户名', trigger: 'blur' }],
+  username: [
+    { required: true, message: t('msg.login.usernameRule'), trigger: 'blur' }
+  ],
   password: [{ required: true, validator: validatePassword(), trigger: 'blur' }]
 })
 const formRef = ref(null)
