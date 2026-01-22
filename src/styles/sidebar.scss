@@ -16,7 +16,9 @@
     left: 0;
     z-index: 1001;
     overflow: hidden;
-
+    .el-avatar {
+      --el-avatar-bg-color: none;
+    }
     // 重置 element-plus 的css
     .horizontal-collapse-transition {
       transition: 0s width ease-in-out, 0s padding-left ease-in-out,

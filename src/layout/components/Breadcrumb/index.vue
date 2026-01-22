@@ -21,7 +21,7 @@
 <script setup>
 import { ref, watch } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
-import useUserStore from '@/store/user'
+import useAppStore from '@/store/app'
 import { generateTitle } from '@/utils/i18n'
 const route = useRoute()
 // 生成数组数据
@@ -40,9 +40,9 @@ const onLinkClick = (item) => {
 }
 
 // 将来需要进行主题替换，所以这里获取下动态样式
-const store = useUserStore()
+const appStore = useAppStore()
 // eslint-disable-next-line
-const linkHoverColor = ref(store.cssVar.menuBg)
+const linkHoverColor = ref(appStore.cssVar.menuBg)
 // 监听路由变化时触发
 watch(
   route,

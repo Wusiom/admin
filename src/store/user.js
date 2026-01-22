@@ -5,12 +5,10 @@ import { setItem, getItem, removeAll } from '@/utils/storage'
 import { TOKEN } from '@/constant'
 import router from '@/router'
 import { setTimeStamp } from '@/utils/auth'
-import variables from '@/styles/variables.module.scss'
 export default defineStore('user', {
   state: () => ({
     userInfo: {},
-    token: getItem(TOKEN) || '',
-    cssVar: variables
+    token: getItem(TOKEN) || ''
   }),
   getters: {
     hasUserInfo: (state) => {

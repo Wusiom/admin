@@ -5,6 +5,8 @@
     <div class="right-menu">
       <LangSelect class="right-menu-item hover-effect" />
       <theme-select class="right-menu-item hover-effect"></theme-select>
+      <screenfull class="right-menu-item hover-effect"></screenfull>
+      <header-search class="right-menu-item hover-effect"></header-search>
       <!-- 头像 -->
       <el-dropdown class="avatar-container" trigger="click">
         <div class="avatar-wrapper">
@@ -39,6 +41,8 @@ import Breadcrumb from '@/layout/components/Breadcrumb/index.vue'
 import useUserStore from '@/store/user'
 import LangSelect from '@/components/LangSelect'
 import ThemeSelect from '@/components/ThemeSelect'
+import Screenfull from '@/components/Screenfull'
+import HeaderSearch from '@/components/HeaderSearch'
 const userStore = useUserStore()
 </script>
 

@@ -1,12 +1,23 @@
 import { defineStore } from 'pinia'
 import { getItem, setItem } from '@/utils/storage'
 import { MAIN_COLOR, DEFAULT_COLOR } from '@/constant'
+import variables from '@/styles/variables.module.scss'
+import { generateColors } from '@/utils/theme'
 export default defineStore('app', {
   state: () => ({
     sidebarOpened: true,
     language: getItem('LANG') || 'zh',
-    mainColor: getItem(MAIN_COLOR) || DEFAULT_COLOR
+    mainColor: getItem(MAIN_COLOR) || DEFAULT_COLOR,
+    variables: variables
   }),
+  getters: {
+    cssVar: (state) => {
+      return {
+        ...state.variables,
+        ...generateColors(state.mainColor)
+      }
+    }
+  },
   actions: {
     triggerSidebarOpened() {
       this.sidebarOpened = !this.sidebarOpened
@@ -18,6 +29,7 @@ export default defineStore('app', {
     setMainColor(color) {
       this.mainColor = color
       setItem(MAIN_COLOR, color)
+      this.variables.menuBg = color
     }
   }
 })
