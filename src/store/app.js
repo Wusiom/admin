@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia'
 import { getItem, setItem } from '@/utils/storage'
-import { MAIN_COLOR, DEFAULT_COLOR } from '@/constant'
+import { MAIN_COLOR, DEFAULT_COLOR, TAGS_VIEW } from '@/constant'
 import variables from '@/styles/variables.module.scss'
 import { generateColors } from '@/utils/theme'
 export default defineStore('app', {
@@ -8,7 +8,8 @@ export default defineStore('app', {
     sidebarOpened: true,
     language: getItem('LANG') || 'zh',
     mainColor: getItem(MAIN_COLOR) || DEFAULT_COLOR,
-    variables: variables
+    variables: variables,
+    tagsViewList: getItem(TAGS_VIEW) || []
   }),
   getters: {
     cssVar: (state) => {
@@ -30,6 +31,23 @@ export default defineStore('app', {
       this.mainColor = color
       setItem(MAIN_COLOR, color)
       this.variables.menuBg = color
+    },
+    addTagsViewList(tag) {
+      const isFind = this.tagsViewList.find(item => {
+        return item.path === tag.path
+      })
+      // 处理重复
+      if (!isFind) {
+        this.tagsViewList.push(tag)
+        setItem(TAGS_VIEW, this.tagsViewList)
+      }
+    },
+    /**
+    * 为指定的 tag 修改 title
+    */
+    changeTagsView({ index, tag }) {
+      this.tagsViewList[index] = tag
+      setItem(TAGS_VIEW, this.tagsViewList)
     }
   }
 })

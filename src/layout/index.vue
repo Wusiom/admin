@@ -12,6 +12,8 @@
       <div class="fixed-header">
         <!-- 顶部的 navbar -->
         <navbar />
+        <!-- 标签视图 -->
+        <tags-view />
       </div>
       <!-- 内容区 -->
       <app-main />
@@ -23,6 +25,7 @@
 import Sidebar from './components/Sidebar/index.vue'
 import Navbar from './components/Navbar/index.vue'
 import AppMain from './components/AppMain/index.vue'
+import TagsView from '@/components/TagsView/index.vue'
 import useAppStore from '@/store/app'
 const appStore = useAppStore()
 </script>
