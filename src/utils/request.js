@@ -1,6 +1,7 @@
 import axios from 'axios'
 import { ElMessage } from 'element-plus'
 import useUserStore from '@/store/user'
+import useAppStore from '@/store/app'
 import { isTimeout } from '@/utils/auth'
 const service = axios.create({
   baseURL: process.env.VUE_APP_BASE_API,
@@ -16,6 +17,7 @@ service.interceptors.request.use(config => {
     }
     config.headers.Authorization = `Bearer ${userStore.token}`
   }
+  config.headers['Accept-Language'] = useAppStore().language
   return config
 }, error => {
   return Promise.reject(error)

@@ -11,10 +11,18 @@ import zhCn from 'element-plus/es/locale/lang/zh-cn'
 import en from 'element-plus/es/locale/lang/en'
 import useAppStore from '@/store/app'
 import { generateNewStyle, writeNewStyle } from '@/utils/theme'
+import { watchSwitchLang } from '@/utils/i18n'
+import useUserStore from '@/store/user'
+const userStore = useUserStore()
 const appStore = useAppStore()
 const locale = computed(() => (appStore.language === 'zh' ? zhCn : en))
 generateNewStyle(appStore.mainColor).then((newStyleText) => {
   writeNewStyle(newStyleText)
+})
+watchSwitchLang(() => {
+  if (userStore.token) {
+    userStore.getUserInfo()
+  }
 })
 </script>
 
