@@ -5,6 +5,7 @@
   >
     <!-- 左侧 menu -->
     <sidebar
+      id="guide-sidebar"
       class="sidebar-container"
       :style="{ backgroundColor: appStore.cssVar.menuBg }"
     />
@@ -13,7 +14,7 @@
         <!-- 顶部的 navbar -->
         <navbar />
         <!-- 标签视图 -->
-        <tags-view />
+        <tags-view id="guide-tags" />
       </div>
       <!-- 内容区 -->
       <app-main />

@@ -48,6 +48,28 @@ export default defineStore('app', {
     changeTagsView({ index, tag }) {
       this.tagsViewList[index] = tag
       setItem(TAGS_VIEW, this.tagsViewList)
+    },
+    /**
+     * 删除 tag
+     * @param {type: 'other'||'right'||'index', index: index} payload
+     */
+    removeTagsView(payload) {
+      if (payload.type === 'index') {
+        this.tagsViewList.splice(payload.index, 1)
+        return
+      } else if (payload.type === 'other') {
+        this.tagsViewList.splice(
+          payload.index + 1,
+          this.tagsViewList.length - payload.index + 1
+        )
+        this.tagsViewList.splice(0, payload.index)
+      } else if (payload.type === 'right') {
+        this.tagsViewList.splice(
+          payload.index + 1,
+          this.tagsViewList.length - payload.index + 1
+        )
+      }
+      setItem(TAGS_VIEW, this.tagsViewList)
     }
   }
 })

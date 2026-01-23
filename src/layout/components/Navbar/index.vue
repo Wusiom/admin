@@ -3,6 +3,7 @@
     <hamburger class="hamburger-container" />
     <breadcrumb class="breadcrumb-container" />
     <div class="right-menu">
+      <guide class="right-menu-item hover-effect" />
       <LangSelect class="right-menu-item hover-effect" />
       <theme-select class="right-menu-item hover-effect"></theme-select>
       <screenfull class="right-menu-item hover-effect"></screenfull>
@@ -43,6 +44,7 @@ import LangSelect from '@/components/LangSelect'
 import ThemeSelect from '@/components/ThemeSelect'
 import Screenfull from '@/components/Screenfull'
 import HeaderSearch from '@/components/HeaderSearch'
+import Guide from '@/components/Guide'
 const userStore = useUserStore()
 </script>
 

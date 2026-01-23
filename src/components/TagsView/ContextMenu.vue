@@ -15,8 +15,9 @@
 <script setup>
 import { defineProps } from 'vue'
 import router from '@/router'
-
-defineProps({
+import useAppStore from '@/store/app'
+const appStore = useAppStore()
+const props = defineProps({
   index: {
     type: Number,
     required: true
@@ -26,9 +27,13 @@ const onRefreshClick = () => {
   router.go(0)
 }
 
-const onCloseRightClick = () => {}
+const onCloseRightClick = () => {
+  appStore.removeTagsView({ type: 'right', index: props.index })
+}
 
-const onCloseOtherClick = () => {}
+const onCloseOtherClick = () => {
+  appStore.removeTagsView({ type: 'other', index: props.index })
+}
 </script>
 
 <style lang="scss" scoped>
