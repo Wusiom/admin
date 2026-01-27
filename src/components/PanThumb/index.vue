@@ -116,14 +116,15 @@ defineProps({
     transform-origin: 95% 40%;
     transition: all 0.3s ease-in-out;
   }
+}
 
-  .pan-item:hover .pan-thumb {
-    transform: rotate(-110deg);
-  }
+// hover 效果应该写在 .pan-item 外部
+.pan-item:hover .pan-thumb {
+  transform: rotate(-110deg);
+}
 
-  .pan-item:hover .pan-info p a {
-    opacity: 1;
-    transform: translateX(0px) rotate(0deg);
-  }
+.pan-item:hover .pan-info p a {
+  opacity: 1;
+  transform: translateX(0px) rotate(0deg);
 }
 </style>

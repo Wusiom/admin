@@ -3,7 +3,7 @@ import { login, getUserInfo } from '@/api/sys'
 import md5 from 'md5'
 import { setItem, getItem, removeAll } from '@/utils/storage'
 import { TOKEN } from '@/constant'
-import router from '@/router'
+import router, { resetRouter } from '@/router'
 import { setTimeStamp } from '@/utils/auth'
 export default defineStore('user', {
   state: () => ({
@@ -35,8 +35,10 @@ export default defineStore('user', {
     async getUserInfo() {
       const res = await getUserInfo()
       this.userInfo = res
+      return res
     },
     logout() {
+      resetRouter()
       this.token = ''
       this.userInfo = {}
       removeAll()
