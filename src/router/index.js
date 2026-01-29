@@ -62,6 +62,15 @@ export const publicRoutes = [
         path: '/401',
         name: '401',
         component: () => import('@/views/error-page/401')
+      },
+      {
+        path: '/chart',
+        name: 'chart',
+        component: () => import('@/views/chart/index'),
+        meta: {
+          title: 'chart',
+          icon: 'chart'
+        }
       }
     ]
   }

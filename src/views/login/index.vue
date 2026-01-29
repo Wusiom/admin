@@ -106,45 +106,64 @@ $light_gray: #eee;
 $cursor: #fff;
 
 .login-container {
-  min-height: 100%;
+  min-height: 100vh;
   width: 100%;
   background-color: $bg;
   overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  box-sizing: border-box;
 
   .login-form {
     position: relative;
     width: 520px;
     max-width: 100%;
-    padding: 160px 35px 0;
-    margin: 0 auto;
+    padding: 40px 35px 30px;
     overflow: hidden;
 
     :deep(.el-form-item) {
+      position: relative;
       border: 1px solid rgba(255, 255, 255, 0.1);
       background: rgba(0, 0, 0, 0.1);
-      border-radius: 5px;
-      color: #454545;
+      border-radius: 6px;
+      color: $light_gray;
+      margin-bottom: 22px;
+
+      .el-form-item__content {
+        display: flex;
+        align-items: center;
+        line-height: normal;
+      }
     }
 
     :deep(.el-input) {
       display: inline-block;
       height: 47px;
-      width: 85%;
+      flex: 1;
+      min-width: 0;
 
       .el-input__wrapper {
         width: 100%;
-        background: transparent;
-        border: 0px;
+        background: transparent !important;
+        border: 0;
         box-shadow: none !important;
+        appearance: none;
         -webkit-appearance: none;
-        border-radius: 0px;
-        padding: 12px 5px 12px 15px;
+        border-radius: 0;
+        padding: 12px 15px 12px 5px;
         color: $light_gray;
         height: 47px;
         caret-color: $cursor;
 
         .el-input__inner {
           color: #fff;
+          background: transparent;
+
+          &::placeholder {
+            color: $dark_gray;
+          }
         }
       }
 
@@ -158,29 +177,52 @@ $cursor: #fff;
     padding: 6px 5px 6px 15px;
     color: $dark_gray;
     vertical-align: middle;
-    display: inline-block;
+    display: inline-flex;
+    align-items: center;
+    flex-shrink: 0;
   }
 
   .title-container {
     position: relative;
+    margin-bottom: 40px;
 
     .title {
       font-size: 26px;
       color: $light_gray;
-      margin: 0px auto 40px auto;
+      margin: 0;
       text-align: center;
-      font-weight: bold;
+      font-weight: 600;
+    }
+
+    .lang-select {
+      position: absolute;
+      right: 0;
+      top: 50%;
+      transform: translateY(-50%);
     }
   }
 
   .show-pwd {
     position: absolute;
-    right: 10px;
-    top: 7px;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
     font-size: 16px;
     color: $dark_gray;
     cursor: pointer;
     user-select: none;
+    z-index: 1;
+
+    &:hover {
+      color: $light_gray;
+    }
+  }
+
+  .tips {
+    color: $dark_gray;
+    font-size: 12px;
+    line-height: 1.6;
+    text-align: center;
   }
 }
 </style>

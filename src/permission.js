@@ -14,7 +14,7 @@ router.beforeEach(async (to, from, next) => {
       // 若不存在用户信息，则需要获取用户信息
       if (!userStore.hasUserInfo) {
         const { permission } = await userStore.getUserInfo()
-        console.log(permission)
+        console.log(permission, 'permission')
         // 处理用户权限，筛选出需要添加的权限
         const filterRoutes = appStore.filterRoutes(permission.menus)
         // 利用 addRoute 循环添加

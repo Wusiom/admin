@@ -5,7 +5,7 @@
 </template>
 
 <script setup>
-import { computed } from 'vue'
+import { computed, onMounted } from 'vue'
 import { ElConfigProvider } from 'element-plus'
 import zhCn from 'element-plus/es/locale/lang/zh-cn'
 import en from 'element-plus/es/locale/lang/en'
@@ -13,6 +13,7 @@ import useAppStore from '@/store/app'
 import { generateNewStyle, writeNewStyle } from '@/utils/theme'
 import { watchSwitchLang } from '@/utils/i18n'
 import useUserStore from '@/store/user'
+import router from '@/router'
 const userStore = useUserStore()
 const appStore = useAppStore()
 const locale = computed(() => (appStore.language === 'zh' ? zhCn : en))
@@ -23,6 +24,9 @@ watchSwitchLang(() => {
   if (userStore.token) {
     userStore.getUserInfo()
   }
+})
+onMounted(() => {
+  console.log(router.getRoutes(), 'router')
 })
 </script>
 
