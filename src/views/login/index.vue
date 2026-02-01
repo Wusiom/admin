@@ -17,7 +17,7 @@
           <SvgIcon icon="user" />
         </span>
         <el-input
-          v-model="form.username"
+          v-model.trim="form.username"
           placeholder="username"
           name="username"
           type="text"

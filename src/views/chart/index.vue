@@ -52,6 +52,7 @@ import tableSheetVue from './components/table-sheet/index.vue'
   background-color: #f0f2f5;
   min-height: 100%;
   box-sizing: border-box;
+  overflow-x: hidden; /* 避免 el-row gutter 负 margin 导致横向滚动条 */
 }
 
 .chart-section {
